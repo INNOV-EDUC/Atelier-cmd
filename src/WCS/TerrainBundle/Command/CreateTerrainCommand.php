@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use WCS\TerrainBundle\Entity\Terrain;
 
 
 class CreateTerrainCommand extends ContainerAwareCommand
@@ -40,16 +41,21 @@ EOT
         $latitude      = $input->getArgument('latitude');
         $longitude   = $input->getArgument('longitude');
 
-        $manipulator = $this->getContainer()->get('fos_user.util.user_manipulator');
-        $manipulator->create($username, $password, $email, !$inactive, $superadmin);
+        $terrain = new Terrain();
+        $terrain->setName($name);
+        $terrain->setLatitude($latitude);
+        $terrain->setLongitude($longitude);
+        $em = $this->getContainer()->get('doctrine')->getManager();
+        $em->persist($terrain);
+        $em->flush();
 
-        $output->writeln(sprintf('Created user <comment>%s</comment>', $username));
+        $output->writeln(sprintf('Created terrain <comment>%s</comment>', $name));
     }
 
     /**
      * @see Command
      */
-    protected function interact(InputInterface $input, OutputInterface $output)
+    /*protected function interact(InputInterface $input, OutputInterface $output)
     {
         if (!$input->getArgument('username')) {
             $username = $this->getHelper('dialog')->askAndValidate(
@@ -95,5 +101,5 @@ EOT
             );
             $input->setArgument('password', $password);
         }
-    }
+    }*/
 }
