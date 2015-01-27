@@ -1,0 +1,7 @@
+wcs_terrain_terrain:
+    resource: "@WCSTerrainBundle/Resources/config/routing/terrain.yml"
+    prefix:   /terrain
+
+wcs_terrain_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: WCSTerrainBundle:Default:index }

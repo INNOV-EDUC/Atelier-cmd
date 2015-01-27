@@ -1,0 +1,30 @@
+terrain:
+    path:     /
+    defaults: { _controller: "WCSTerrainBundle:Terrain:index" }
+
+terrain_show:
+    path:     /{id}/show
+    defaults: { _controller: "WCSTerrainBundle:Terrain:show" }
+
+terrain_new:
+    path:     /new
+    defaults: { _controller: "WCSTerrainBundle:Terrain:new" }
+
+terrain_create:
+    path:     /create
+    defaults: { _controller: "WCSTerrainBundle:Terrain:create" }
+    requirements: { _method: post }
+
+terrain_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "WCSTerrainBundle:Terrain:edit" }
+
+terrain_update:
+    path:     /{id}/update
+    defaults: { _controller: "WCSTerrainBundle:Terrain:update" }
+    requirements: { _method: post|put }
+
+terrain_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "WCSTerrainBundle:Terrain:delete" }
+    requirements: { _method: post|delete }
